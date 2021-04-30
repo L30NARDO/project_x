@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_x/controllers/app_controller.dart';
-import 'package:project_x/views/home_page.dart';
-import 'package:project_x/views/login_page.dart';
-import 'package:project_x/views/currency_widget.dart';
+import 'package:project_x/app/controllers/app_controller.dart';
+import 'package:project_x/app/views/currency_view.dart';
+
+import 'home_view.dart';
+import 'login_view.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -18,9 +19,9 @@ class AppWidget extends StatelessWidget {
                       : Brightness.light),
               initialRoute: '/currency',
               routes: {
-                '/': (context) => LoginPage(),
-                '/home': (context) => HomePage(),
-                '/currency': (context) => CurrencyPage(),
+                '/': (context) => LoginView(),
+                '/home': (context) => HomeView(),
+                '/currency': (context) => CurrencyView(),
               } //Routes
               );
         } // Builder

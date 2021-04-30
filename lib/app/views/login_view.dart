@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginView extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginViewState createState() => _LoginViewState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginViewState extends State<LoginView> {
   String email = '';
   String password = '';
   Widget _body() {
@@ -56,9 +56,11 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         height: 15,
                       ),
-                      RaisedButton(
-                        textColor: Colors.white,
-                        color: Colors.blue[900],
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue[900],
+                          onPrimary: Colors.white,
+                        ),
                         onPressed: () {
                           if (email == 'teste@teste.com' &&
                               password == 'teste') {
@@ -91,7 +93,10 @@ class _LoginPageState extends State<LoginPage> {
 
   showAlertDialog1(BuildContext context, String erro) {
     // configura o button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
+      style: TextButton.styleFrom(
+        primary: Colors.blue[900],
+      ),
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();

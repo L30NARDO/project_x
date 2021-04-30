@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project_x/controllers/app_controller.dart';
+import 'package:project_x/app/controllers/app_controller.dart';
 
-class HomePage extends StatefulWidget {
+class HomeView extends StatefulWidget {
   @override
-  State<HomePage> createState() {
-    return HompePageState();
+  State<HomeView> createState() {
+    return HomeViewState();
   }
 }
 
-class HompePageState extends State<HomePage> {
+class HomeViewState extends State<HomeView> {
   int counter = 0;
   @override
   Widget build(BuildContext context) {
