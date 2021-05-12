@@ -15,7 +15,7 @@ class CurrencyModel {
     return this.name;
   }
 
-  void set setName(String name) {
+  set setName(String name) {
     this.name = name;
   }
 
@@ -23,7 +23,7 @@ class CurrencyModel {
     return this.real;
   }
 
-  void set setReal(double real) {
+  set setReal(double real) {
     this.real = real;
   }
 
@@ -31,7 +31,7 @@ class CurrencyModel {
     return this.dollar;
   }
 
-  void set setDollar(double dollar) {
+  set setDollar(double dollar) {
     this.dollar = dollar;
   }
 
@@ -39,7 +39,7 @@ class CurrencyModel {
     return this.euro;
   }
 
-  void set setEuro(double euro) {
+  set setEuro(double euro) {
     this.euro = euro;
   }
 
@@ -47,7 +47,7 @@ class CurrencyModel {
     return this.bitcoin;
   }
 
-  void set setBitcoin(double bitcoin) {
+  set setBitcoin(double bitcoin) {
     this.bitcoin = bitcoin;
   }
 

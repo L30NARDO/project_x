@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/app/controllers/app_controller.dart';
+import 'package:http/http.dart' as http;
 
 class HomeView extends StatefulWidget {
   @override
@@ -36,6 +37,14 @@ class HomeViewState extends State<HomeView> {
               subtitle: Text('Converter moeda'),
               onTap: () {
                 Navigator.of(context).pushNamed('/currency');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('User'),
+              subtitle: Text('Menu de usuários'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/userlist');
               },
             ),
             ListTile(
@@ -109,4 +118,10 @@ class CustomSwitcher extends StatelessWidget {
       },
     );
   }
+}
+
+fatch() {
+  var url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
+
+  http.get(url);
 }

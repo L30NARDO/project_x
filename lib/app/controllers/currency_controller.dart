@@ -17,7 +17,7 @@ class CurrencyController {
     fromCurrency = currencies[1];
   }
 
-  void set setToCurrency(CurrencyModel toCurrency) {
+  set setToCurrency(CurrencyModel toCurrency) {
     this.toCurrency = toCurrency;
   }
 

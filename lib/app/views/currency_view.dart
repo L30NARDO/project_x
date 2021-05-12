@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/app/controllers/currency_controller.dart';
 import 'package:project_x/app/models/currency_model.dart';
-import 'package:project_x/app/utils/currency_box.dart';
+import 'package:project_x/app/components/currency_box.dart';
 
 class CurrencyView extends StatefulWidget {
   @override
