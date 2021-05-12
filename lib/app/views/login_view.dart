@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_x/app/controllers/login_controller.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -8,6 +9,9 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   String email = '';
   String password = '';
+  bool obscure = true;
+  late LoginController loginController = new LoginController();
+
   Widget _body() {
     return SingleChildScrollView(
       child: SizedBox(
@@ -30,7 +34,7 @@ class _LoginViewState extends State<LoginView> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      TextField(
+                      TextFormField(
                         onChanged: (text) {
                           email = text;
                         },
@@ -38,19 +42,40 @@ class _LoginViewState extends State<LoginView> {
                         decoration: InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(),
+                          icon: Icon(
+                            Icons.email,
+                            color: Colors.blue[900],
+                          ),
                         ),
                       ),
                       SizedBox(
                         height: 15,
                       ),
-                      TextField(
+                      TextFormField(
                         onChanged: (text) {
                           password = text;
                         },
-                        obscureText: true,
+                        obscureText: obscure,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           border: OutlineInputBorder(),
+                          icon: Icon(
+                            Icons.lock,
+                            color: Colors.blue[900],
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              obscure ? Icons.visibility : Icons.visibility_off,
+                              color: Theme.of(context).primaryColorDark,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              setState(() {
+                                obscure = !obscure;
+                              });
+                            },
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -62,14 +87,16 @@ class _LoginViewState extends State<LoginView> {
                           onPrimary: Colors.white,
                         ),
                         onPressed: () {
-                          if (email == 'teste@teste.com' &&
-                              password == 'teste') {
+                          print(loginController.verifyLogin(email, password));
+                          // if (email == 'teste@teste.com' &&
+                          //     password == 'teste') {
+                          if (loginController.verifyLogin(email, password)) {
                             Navigator.of(context).pushReplacementNamed('/home'
                                 //pushReplacement(
                                 //    MaterialPageRoute(builder: (context) => HomePage()),
                                 );
                           } else {
-                            if (email != 'teste@teste.com') {
+                            if (email == '') {
                               showAlertDialog1(context,
                                   'Campo EMAIL vazio ou incorreto, confira suas credenciais');
                             } else {
