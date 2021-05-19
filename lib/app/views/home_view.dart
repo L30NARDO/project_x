@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/app/controllers/app_controller.dart';
 import 'package:http/http.dart' as http;
+import 'package:project_x/app/controllers/login_controller.dart';
+import 'package:project_x/app/models/login_model.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -11,26 +13,33 @@ class HomeView extends StatefulWidget {
 
 class HomeViewState extends State<HomeView> {
   int counter = 0;
+  late LoginController loginController = new LoginController();
+  late Login login;
   @override
   Widget build(BuildContext context) {
+    Object? email = ModalRoute.of(context)!.settings.arguments;
+    if (email != null) {
+      login = loginController.searchLoginByEmail(email.toString());
+    }
+
     return Scaffold(
       drawer: Drawer(
         child: Column(
           children: [
             UserAccountsDrawerHeader(
               currentAccountPicture:
-                  ClipOval(child: Image.asset('assets/images/logoLianna.png')),
-              accountName: Text('Lianna Atelier Criativo'),
-              accountEmail: Text('teste@teste.com'),
+                  ClipOval(child: Image.network(login.user.avatarUrl)),
+              accountName: Text(login.user.name),
+              accountEmail: Text(login.user.email),
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              subtitle: Text('Tela de inicio'),
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/home');
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.home),
+            //   title: Text('Home'),
+            //   subtitle: Text('Tela de inicio'),
+            //   onTap: () {
+            //     Navigator.of(context).pushReplacementNamed('/home');
+            //   },
+            // ),
             ListTile(
               leading: Icon(Icons.money),
               title: Text('Currency'),

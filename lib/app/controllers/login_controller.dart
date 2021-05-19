@@ -15,4 +15,15 @@ class LoginController with ChangeNotifier {
 
     return false;
   }
+
+  Login searchLoginByEmail(String email) {
+    Login login = _items.values.elementAt(0);
+
+    for (int i = 0; i < _items.length; i++) {
+      if (_items.values.elementAt(i).user.email == email) {
+        login = _items.values.elementAt(i);
+      }
+    }
+    return login;
+  }
 }

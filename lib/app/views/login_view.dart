@@ -91,10 +91,12 @@ class _LoginViewState extends State<LoginView> {
                           // if (email == 'teste@teste.com' &&
                           //     password == 'teste') {
                           if (loginController.verifyLogin(email, password)) {
-                            Navigator.of(context).pushReplacementNamed('/home'
-                                //pushReplacement(
-                                //    MaterialPageRoute(builder: (context) => HomePage()),
-                                );
+                            Navigator.of(context).pushReplacementNamed(
+                              '/home',
+                              arguments: email,
+                              //pushReplacement(
+                              //    MaterialPageRoute(builder: (context) => HomePage()),
+                            );
                           } else {
                             if (email == '') {
                               showAlertDialog1(context,
