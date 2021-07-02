@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/app/controllers/login_controller.dart';
+import 'package:project_x/app/views/register_view.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -15,108 +16,116 @@ class _LoginViewState extends State<LoginView> {
   Widget _body() {
     return SingleChildScrollView(
       child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Container(
-                width: 250,
-                height: 150,
-                child: Image.asset('assets/images/logo.png'),
-              ),
-              Container(
-                height: 20,
-              ),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        onChanged: (text) {
-                          email = text;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          border: OutlineInputBorder(),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              width: 250,
+              height: 150,
+              child: Image.asset('assets/images/logo.png'),
+            ),
+            Container(
+              height: 20,
+            ),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (text) {
+                        email = text;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                        icon: Icon(
+                          Icons.email,
+                          color: Colors.blue[900],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      onChanged: (text) {
+                        password = text;
+                      },
+                      obscureText: obscure,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: OutlineInputBorder(),
+                        icon: Icon(
+                          Icons.lock,
+                          color: Colors.blue[900],
+                        ),
+                        suffixIcon: IconButton(
                           icon: Icon(
-                            Icons.email,
-                            color: Colors.blue[900],
+                            // Based on passwordVisible state choose the icon
+                            obscure ? Icons.visibility : Icons.visibility_off,
+                            color: Theme.of(context).primaryColorDark,
                           ),
+                          onPressed: () {
+                            // Update the state i.e. toogle the state of passwordVisible variable
+                            setState(() {
+                              obscure = !obscure;
+                            });
+                          },
                         ),
                       ),
-                      SizedBox(
-                        height: 15,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue[900],
+                        onPrimary: Colors.white,
                       ),
-                      TextFormField(
-                        onChanged: (text) {
-                          password = text;
-                        },
-                        obscureText: obscure,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          border: OutlineInputBorder(),
-                          icon: Icon(
-                            Icons.lock,
-                            color: Colors.blue[900],
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              // Based on passwordVisible state choose the icon
-                              obscure ? Icons.visibility : Icons.visibility_off,
-                              color: Theme.of(context).primaryColorDark,
-                            ),
-                            onPressed: () {
-                              // Update the state i.e. toogle the state of passwordVisible variable
-                              setState(() {
-                                obscure = !obscure;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blue[900],
-                          onPrimary: Colors.white,
-                        ),
-                        onPressed: () {
-                          print(loginController.verifyLogin(email, password));
-                          // if (email == 'teste@teste.com' &&
-                          //     password == 'teste') {
-                          if (loginController.verifyLogin(email, password)) {
-                            Navigator.of(context).pushReplacementNamed(
-                              '/home',
-                              arguments: email,
-                              //pushReplacement(
-                              //    MaterialPageRoute(builder: (context) => HomePage()),
-                            );
+                      onPressed: () {
+                        print(loginController.verifyLogin(email, password));
+                        // if (email == 'teste@teste.com' &&
+                        //     password == 'teste') {
+                        if (loginController.verifyLogin(email, password)) {
+                          Navigator.of(context).pushReplacementNamed(
+                            '/home',
+                            arguments: email,
+                            //pushReplacement(
+                            //    MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        } else {
+                          if (email == '') {
+                            showAlertDialog1(context,
+                                'Campo EMAIL vazio ou incorreto, confira suas credenciais');
                           } else {
-                            if (email == '') {
-                              showAlertDialog1(context,
-                                  'Campo EMAIL vazio ou incorreto, confira suas credenciais');
-                            } else {
-                              showAlertDialog1(context,
-                                  'Campo SENHA vazio ou incorreto, confira suas crendenciais');
-                            }
+                            showAlertDialog1(context,
+                                'Campo SENHA vazio ou incorreto, confira suas crendenciais');
                           }
+                        }
+                      },
+                      child: Container(
+                          width: double.infinity,
+                          child: Text('Entrar', textAlign: TextAlign.center)),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => RegisterView()),
+                          );
                         },
-                        child: Container(
-                            width: double.infinity,
-                            child: Text('Entrar', textAlign: TextAlign.center)),
-                      )
-                    ],
-                  ),
+                        child: Text("Não tem conta? Registre-se aqui"))
+                  ],
                 ),
               ),
-            ]),
-          )),
+            ),
+          ]),
+        ),
+      ),
     );
   }
 

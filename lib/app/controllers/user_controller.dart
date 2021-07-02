@@ -20,7 +20,7 @@ class Users with ChangeNotifier {
   }
 
   void put(User user) {
-    if (user == null) {
+    if (user.id.isEmpty) {
       return;
     }
     if (user.id.isNotEmpty && //atualizar
@@ -51,7 +51,7 @@ class Users with ChangeNotifier {
   }
 
   void remove(User user) {
-    if (user != null && user.id.isNotEmpty) {
+    if (user.id.isNotEmpty && user.id.isNotEmpty) {
       _items.remove(user.id);
     }
     notifyListeners();

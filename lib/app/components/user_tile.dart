@@ -9,7 +9,7 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final avatar = user.avatarUrl == null || user.avatarUrl.trim().isEmpty
+    final avatar = user.avatarUrl.isEmpty || user.avatarUrl.trim().isEmpty
         ? CircleAvatar(
             child: Icon(Icons.person),
           )
